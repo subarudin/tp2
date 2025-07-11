@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Sistem Manajemen Buku Perpustakaan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" title="Toggle Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">
+                    <i class="fas fa-book-open"></i>
+                    Library System
+                </div>
+            </div>
+            
+            <div class="sidebar-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalBooks">0</div>
+                    <div class="stat-label">Total Books</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="availableBooks">0</div>
+                    <div class="stat-label">Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="borrowedBooks">0</div>
+                    <div class="stat-label">Borrowed</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-wrapper">
+            <!-- Add Book Form Card -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-plus-circle"></i>
+                        Add New Book
+                    </h2>
+                </div>
+                <form id="addBookForm" class="add-book-form">
+            <div class="header-content">
+                <h1><i class="fas fa-book"></i> Sistem Manajemen Buku Perpustakaan</h1>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalBooks">0</span>
+                        <span class="stat-label">Total Buku</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="availableBooks">0</span>
+                        <span class="stat-label">Tersedia</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="borrowedBooks">0</span>
+                        <span class="stat-label">Dipinjam</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Add Book Form (now always visible) -->
+            <section class="add-book-section">
+                    <div class="form-group">
+                        <label for="title">Judul Buku *</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Penulis *</label>
+                        <input type="text" id="author" name="author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN</label>
+                        <input type="text" id="isbn" name="isbn" placeholder="10 atau 13 digit">
+                    </div>
+                    <div class="form-group">
+                        <label for="publicationYear">Tahun Terbit</label>
+                        <input type="number" id="publicationYear" name="publicationYear" min="1000" max="2025">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Kategori</label>
+                        <select id="category" name="category">
+                            <option value="">Pilih Kategori</option>
+                            <option value="Programming">Programming</option>
+                            <option value="Fiction">Fiction</option>
+                            <option value="Non-Fiction">Non-Fiction</option>
+                            <option value="Science">Science</option>
+                            <option value="History">History</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Business">Business</option>
+                            <option value="Education">Education</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="stockQuantity">Jumlah Stok</label>
+                        <input type="number" id="stockQuantity" name="stockQuantity" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Harga (Rp)</label>
+                        <input type="number" id="price" name="price" min="0" step="1000">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status Buku *</label>
+                        <select id="status" name="status" required>
+                            <option value="AVAILABLE">Tersedia</option>
+                            <option value="BORROWED">Dipinjam</option>
+                            <option value="RESERVED">Dipesan</option>
+                            <option value="LOST">Hilang</option>
+                            <option value="DAMAGED">Rusak</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Deskripsi</label>
+                        <textarea id="description" name="description" rows="2" placeholder="Deskripsi singkat tentang buku..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="saveBtn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Tambah Buku
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Search and Filter Card -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-search"></i>
+                        Search & Filter
+                    </h2>
+                </div>
+                <div class="search-filter-section">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Cari buku berdasarkan judul, penulis, atau kategori...">
+                        <button id="searchBtn" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="filter-group">
+                        <select id="categoryFilter" class="form-select">
+                            <option value="">Semua Kategori</option>
+                            <option value="Programming">Programming</option>
+                            <option value="Fiction">Fiction</option>
+                            <option value="Non-Fiction">Non-Fiction</option>
+                            <option value="Science">Science</option>
+                            <option value="History">History</option>
+                        </select>
+                        <select id="statusFilter" class="form-select">
+                            <option value="">Semua Status</option>
+                            <option value="AVAILABLE">Tersedia</option>
+                            <option value="BORROWED">Dipinjam</option>
+                            <option value="RESERVED">Dipesan</option>
+                            <option value="LOST">Hilang</option>
+                            <option value="DAMAGED">Rusak</option>
+                        </select>
+                    </div>
+                    <button id="refreshBtn" class="btn btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Books Table Card -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-list"></i>
+                        Book List
+                    </h2>
+                </div>
+                <div class="table-container">
+                    <table class="books-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Judul</th>
+                                <th>Penulis</th>
+                                <th>ISBN</th>
+                                <th>Tahun</th>
+                                <th>Kategori</th>
+                                <th>Stok</th>
+                                <th>Harga</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookTableBody">
+                            <!-- Data buku akan diisi melalui JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination container -->
+                <div id="paginationContainer" class="pagination-container"></div>
+                <div id="errorState" class="error-state" style="display:none"></div>
+
+                <!-- Loading Spinner -->
+                <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Memuat data...</p>
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Tidak ada buku</h3>
+                    <p>Belum ada buku yang ditambahkan. Mulai dengan menambahkan buku pertama!</p>
+                    <button id="addFirstBookBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Tambah Buku Pertama
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Konfirmasi Hapus -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Konfirmasi Hapus</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus buku "<span id="deleteBookTitle"></span>"?</p>
+                <p class="warning-text">Tindakan ini tidak dapat dibatalkan.</p>
+            </div>
+            <div class="modal-actions">
+                <button id="cancelDeleteBtn" class="btn btn-secondary">Batal</button>
+                <button id="confirmDeleteBtn" class="btn btn-danger">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

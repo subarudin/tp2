@@ -1,0 +1,11 @@
+com\example\testuas\entity\Book$BookStatus.class
+com\example\testuas\entity\Book.class
+com\example\testuas\controller\BookController.class
+com\example\testuas\exception\GlobalExceptionHandler.class
+com\example\testuas\exception\GlobalExceptionHandler$ErrorResponse.class
+com\example\testuas\repository\BookRepository.class
+com\example\testuas\dto\BookRequest.class
+com\example\testuas\service\BookService.class
+com\example\testuas\service\BookService$BookStatistics.class
+com\example\testuas\TestuasApplication.class
+com\example\testuas\dto\BookResponse.class
